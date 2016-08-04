@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{114A3C1C-3AB2-4B3C-B69A-BC42D653D171}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{273827DB-7D81-414C-AD8D-7E402CA1E510}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EmptyTheme", "src\EmptyTheme\EmptyTheme.xproj", "{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB} = {114A3C1C-3AB2-4B3C-B69A-BC42D653D171}
+	EndGlobalSection
+EndGlobal
