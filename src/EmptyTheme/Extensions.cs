@@ -9,7 +9,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.FileProviders;
 
-namespace Theme
+namespace Ausm.EmptyTheme
 {
     public static class ThemeExtensions
     {
