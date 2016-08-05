@@ -6,7 +6,7 @@ Travis CI:
 Appveyor:
 [![Build status](https://ci.appveyor.com/api/projects/status/3ppghqrpyal0f45i/branch/master?svg=true)](https://ci.appveyor.com/project/Ausm/themes/branch/master)
 MyGet:
-[![MyGet CI](https://img.shields.io/myget/themes/v/EmptyTheme.svg)](https://www.myget.org/feed/themes/package/nuget/EmptyTheme)
+[![MyGet CI](https://img.shields.io/myget/themes/v/Ausm.EmptyTheme.svg)](https://www.myget.org/feed/themes/package/nuget/Ausm.EmptyTheme)
 
 ##How to Use?
 
