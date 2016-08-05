@@ -3,8 +3,11 @@
 	"name": "asp.net",
 	"private": true,
   "devDependencies": {
-    "bootstrap": "3.3.7",
-    "gulp": "3.9.1",
-    "gulp-clean": "0.3.2"
+    "bootstrap": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-dest-clean" : "^0.5.0"
+  },
+  "scripts": {
+    "postinstall": "gulp default"
   }
 }
