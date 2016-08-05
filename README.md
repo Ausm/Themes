@@ -1,6 +1,11 @@
 # Themes
 ASP.Net Core MVC6 themes
 
+Travis CI:
+[![Build Status](https://travis-ci.org/Ausm/Themes.svg?branch=master)](https://travis-ci.org/Ausm/Themes)
+Appveyor:
+[![Build status](https://ci.appveyor.com/api/projects/status/3ppghqrpyal0f45i/branch/master?svg=true)](https://ci.appveyor.com/project/Ausm/themes/branch/master)
+
 ##How to Use?
 
 
