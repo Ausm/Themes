@@ -22,6 +22,7 @@ matrix:
 
 install:
   # Download .NET Core SDK and add to PATH
+  - npm install
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetsdk"
   - mkdir -p "$DOTNET_INSTALL_DIR"
   - curl -L "$DOTNET_SDK_URL" | tar -xzv -C "$DOTNET_INSTALL_DIR"
