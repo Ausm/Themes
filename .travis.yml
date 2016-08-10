@@ -37,6 +37,6 @@ script:
   - dotnet --info
   - dotnet restore
   # dotnet build
-  - dotnet build --framework "netcoreapp1.0" **/project.json
+  - sudo dotnet build --framework "netcoreapp1.0" **/project.json
   # dotnet test
   - dotnet test --framework "netcoreapp1.0" test/Ausm.EmptyTheme.Test/project.json
