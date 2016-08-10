@@ -23,7 +23,7 @@ matrix:
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g gulp; fi
-	 
+
 install:
   # Download .NET Core SDK and add to PATH
   - export DOTNET_INSTALL_DIR="$PWD/.dotnetsdk"
