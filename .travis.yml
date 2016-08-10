@@ -22,7 +22,7 @@ matrix:
       env: DOTNET_SDK_URL=https://go.microsoft.com/fwlink/?LinkID=809128 # v1.0.0-preview2
 
 before_script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm install -g gulp; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo npm install -g gulp; fi
 
 install:
   # Download .NET Core SDK and add to PATH
