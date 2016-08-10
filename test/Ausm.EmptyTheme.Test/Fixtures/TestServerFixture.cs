@@ -3,17 +3,14 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
-using Microsoft.AspNetCore.Http;
-using Ausm.EmptyTheme;
 using Microsoft.AspNetCore.Builder;
 
-namespace ObjectStore.Test.Identity.Fixtures
+namespace Ausm.EmptyTheme.Test.Fixtures
 {
     public class TestServerFixture : IDisposable
     {
         TestServer _server;
         HttpClient _client;
-        RequestDelegate _function;
 
         public TestServerFixture()
         {

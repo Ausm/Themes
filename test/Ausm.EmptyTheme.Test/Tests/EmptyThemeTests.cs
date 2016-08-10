@@ -1,13 +1,11 @@
 ﻿using Xunit;
 using System;
-using System.Linq;
 using Xunit.Abstractions;
 using System.Threading.Tasks;
-using ObjectStore.Test.Identity.Fixtures;
-using System.Collections.Generic;
+using Ausm.EmptyTheme.Test.Fixtures;
 using System.Security.Cryptography;
 
-namespace ObjectStore.Test.Identity
+namespace Ausm.EmptyTheme.Test
 {
     public class EmptyThemeTests : IClassFixture<TestServerFixture>
     {
