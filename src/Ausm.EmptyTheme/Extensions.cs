@@ -17,7 +17,7 @@ namespace Ausm.EmptyTheme
         {
             services.Configure<RazorViewEngineOptions>(options =>
             {
-                options.FileProviders.Add(new EmbeddedFileProvider(typeof(ThemeExtensions).GetTypeInfo().Assembly, nameof(EmptyTheme)));
+                options.FileProviders.Add(new EmbeddedFileProvider(typeof(ThemeExtensions).GetTypeInfo().Assembly, typeof(ThemeExtensions).Namespace));
             });
         }
 
@@ -26,7 +26,7 @@ namespace Ausm.EmptyTheme
         {
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new EmbeddedFileProvider(typeof(ThemeExtensions).GetTypeInfo().Assembly, nameof(EmptyTheme) + ".wwwroot")
+                FileProvider = new EmbeddedFileProvider(typeof(ThemeExtensions).GetTypeInfo().Assembly, typeof(ThemeExtensions).Namespace + ".wwwroot")
             });
         }
     }
