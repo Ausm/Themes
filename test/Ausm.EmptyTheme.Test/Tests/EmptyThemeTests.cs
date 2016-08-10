@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 
 namespace ObjectStore.Test.Identity
 {
-    public class IdentityTests : IClassFixture<TestServerFixture>
+    public class EmptyThemeTests : IClassFixture<TestServerFixture>
     {
         #region Fields
         ITestOutputHelper _output;
@@ -17,7 +17,7 @@ namespace ObjectStore.Test.Identity
         #endregion
 
         #region Constructor
-        public IdentityTests(ITestOutputHelper output, TestServerFixture fixture)
+        public EmptyThemeTests(ITestOutputHelper output, TestServerFixture fixture)
         {
             _output = output;
             _fixture = fixture;
@@ -52,6 +52,7 @@ namespace ObjectStore.Test.Identity
                 returnValue.Add("/fonts/glyphicons-halflings-regular.woff", "J45JqG5jTabyoC87R92dKo8mIQ8=");
                 returnValue.Add("/fonts/glyphicons-halflings-regular.woff2", "yjW2l9mcrk0bYPLWD803dxmH6wc=");
                 returnValue.Add("/js/bootstrap.min.js", "QwpEPXSDD+m+Ju/KQx9EjBs3QPk=");
+                returnValue.Add("/Home/Index", "NxhgNDtDNocTtV/C3v0HSoULoiE=");
                 return returnValue;
             }
         }

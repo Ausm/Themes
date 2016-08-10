@@ -5,6 +5,7 @@ using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
 using Ausm.EmptyTheme;
+using Microsoft.AspNetCore.Builder;
 
 namespace ObjectStore.Test.Identity.Fixtures
 {
@@ -17,10 +18,14 @@ namespace ObjectStore.Test.Identity.Fixtures
         public TestServerFixture()
         {
             _server = new TestServer(new WebHostBuilder()
-                .ConfigureServices(services => services.AddTheme())
-                .Configure(
-                    app => app.UseTheme()
-                ));
+                .ConfigureServices(services => {
+                    services.AddTheme();
+                    services.AddMvc();
+                })
+                .Configure(app => {
+                    app.UseTheme();
+                    app.UseMvcWithDefaultRoute();
+                }));
             _client = _server.CreateClient();
         }
 
