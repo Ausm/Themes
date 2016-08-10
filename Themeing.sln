@@ -8,9 +8,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{273827DB-7D81-414C-AD8D-7E402CA1E510}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EmptyTheme", "src\EmptyTheme\EmptyTheme.xproj", "{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Ausm.EmptyTheme", "src\Ausm.EmptyTheme\Ausm.EmptyTheme.xproj", "{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{338D1990-C0B8-41DB-80BB-F4DE5C77935D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Ausm.EmptyTheme.Test", "test\Ausm.EmptyTheme.Test\Ausm.EmptyTheme.Test.xproj", "{BF111D86-B987-436C-A938-E44777495BA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,11 +27,16 @@ Global
 		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF111D86-B987-436C-A938-E44777495BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF111D86-B987-436C-A938-E44777495BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF111D86-B987-436C-A938-E44777495BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF111D86-B987-436C-A938-E44777495BA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F9DBACCC-4D05-490F-8F2B-300D6B72E8AB} = {114A3C1C-3AB2-4B3C-B69A-BC42D653D171}
+		{BF111D86-B987-436C-A938-E44777495BA3} = {338D1990-C0B8-41DB-80BB-F4DE5C77935D}
 	EndGlobalSection
 EndGlobal

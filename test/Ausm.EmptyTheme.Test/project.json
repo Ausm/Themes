@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+  "description": "EmptyTheme.Test.Identity Class Library",
+  "authors": [ "MatthiasA" ],
+  "dependencies": {
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Microsoft.AspNetCore.TestHost": "1.0.0",
+    "Ausm.EmptyTheme": "1.0.0-alpha"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        },
+        "Microsoft.CodeCoverage": "1.0.1"
+      },
+      "imports": [
+        "dnxcore50",
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    },
+  }
+}
