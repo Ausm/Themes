@@ -61,4 +61,4 @@ $revision = "{0:D4}" -f [convert]::ToInt32($revision, 10)
 
 exec { & dotnet test .\test\Ausm.EmptyTheme.Test -c Release }
 
-exec { & dotnet pack .\src\EmptyTheme -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\src\Ausm.EmptyTheme -c Release -o .\artifacts --version-suffix=$revision }
