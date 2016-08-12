@@ -1,9 +1,8 @@
-language: generic
+language: node_js
 
 addons:
   apt:
     packages:
-    - npm
     - gettext
     - libcurl4-openssl-dev
     - libicu-dev
