@@ -16,7 +16,7 @@ namespace Ausm.ThemeWithMenuAndIdentity.Test.Fixtures
         {
             _server = new TestServer(new WebHostBuilder()
                 .ConfigureServices(services => {
-                    services.AddTheme();
+                    services.AddTheme("Data Source=Database.db");
                     services.AddMvc();
                 })
                 .Configure(app => {
