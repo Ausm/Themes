@@ -14,5 +14,6 @@ gulp.task('copy:fonts', function () {
 });
 
 gulp.task('copy:js', function () {
-    return gulp.src('./node_modules/bootstrap/dist/js/*.min.js').pipe(gulp.dest('./wwwroot/js')).pipe(clean('./wwwroot/js'));
+    return gulp.src(['./node_modules/bootstrap/dist/js/*.min.js', './node_modules/jquery/dist/*.min.js'])
+            .pipe(gulp.dest('./wwwroot/js')).pipe(clean('./wwwroot/js'));
 });

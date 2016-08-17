@@ -52,7 +52,7 @@ namespace Ausm.ThemeWithMenuAndIdentity.Test
                 returnValue.Add("/fonts/glyphicons-halflings-regular.woff", null);
                 returnValue.Add("/fonts/glyphicons-halflings-regular.woff2", null);
                 returnValue.Add("/js/bootstrap.min.js", "* Bootstrap v3");
-                returnValue.Add("/Home/Index", "<title>Home</title>");
+                //returnValue.Add("/Home/Index", "<title>Home</title>");
                 return returnValue;
             }
         }
