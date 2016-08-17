@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ausm.ThemeWithMenuAndIdentity.Code
+namespace Ausm.ThemeWithMenuAndIdentity
 {
     public class ThemeOptions
     {
-        public IEnumerable<IMenuItem> PublicRootMenuItems { get; set; }
-        public Func<IEnumerable<IMenuItem>> UserDependendMenuItems { get; set; }
+        public string LogoUrl { get; set; }
+        public IEnumerable<IMenuItem> StaticMenuItems { get; set; }
+        public Func<IEnumerable<IMenuItem>> DynamicMenuItems { get; set; }
     }
 }
