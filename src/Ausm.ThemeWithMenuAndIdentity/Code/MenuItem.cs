@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ausm.ThemeWithMenuAndIdentity
 {
@@ -9,7 +8,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
     {
         string Name { get; }
         string Url { get; }
-        Type Controller { get; }
+        string Controller { get; }
         string Action { get; }
         IEnumerable<IMenuItem> SubItems { get; }
 
@@ -21,7 +20,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
     public class MenuItem : IMenuItem
     {
         #region Fields
-        Type _controller;
+        string _controller;
         string _action;
         string _name;
         string _url;
@@ -33,7 +32,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         #endregion
 
         #region Constructors
-        private MenuItem(string name, string url, Type controller, string action, Func<IEnumerable<IMenuItem>> subItemsFunc, IMenuItem[] subItems)
+        public MenuItem(string name, string url = null, string controller = null, string action = null, Func<IEnumerable<IMenuItem>> subItemsFunc = null, IMenuItem[] subItems = null)
         {
             _name = name;
             _url = url;
@@ -45,23 +44,8 @@ namespace Ausm.ThemeWithMenuAndIdentity
             _isVisible = true;
         }
 
-        public MenuItem(string name, Type controller, string action, Func<IEnumerable<IMenuItem>> subItemsFunc = null) :
-            this(name, null, controller, action, subItemsFunc, null)
-        {
-        }
-
-        public MenuItem(string name, string url, Func<IEnumerable<IMenuItem>> subItemsFunc = null) :
-            this(name, url, null, null, subItemsFunc, null)
-        {
-        }
-
-        public MenuItem(string name, Type controller, string action, params IMenuItem[] subItems) :
-            this(name, null, controller, action, null, subItems)
-        {
-        }
-
-        public MenuItem(string name, string url, IMenuItem[] subItems) :
-            this(name, url, null, null, null, subItems)
+        public MenuItem(string name, params IMenuItem[] subItems) :
+            this(name, null, null, null, null, subItems)
         {
         }
         #endregion
@@ -95,7 +79,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         #region IMenuItem Member
         string IMenuItem.Action => _action;
 
-        Type IMenuItem.Controller => _controller;
+        string IMenuItem.Controller => _controller;
 
         bool IMenuItem.IsEnabled => _isEnabled;
 
@@ -125,7 +109,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
     public class SeparatorItem : IMenuItem
     {
         string IMenuItem.Action => null;
-        Type IMenuItem.Controller => null;
+        string IMenuItem.Controller => null;
         bool IMenuItem.IsEnabled => false;
         bool IMenuItem.IsSeparator => true;
         bool IMenuItem.IsVisible => true;

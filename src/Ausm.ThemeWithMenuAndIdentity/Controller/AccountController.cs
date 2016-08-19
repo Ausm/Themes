@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Ausm.ThemeWithMenuAndIdentity.ViewModels.Account;
@@ -53,7 +50,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
 
             Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
             if (result.Succeeded)
-                return Redirect(returnUrl);
+                return Redirect(returnUrl ?? "/");
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
