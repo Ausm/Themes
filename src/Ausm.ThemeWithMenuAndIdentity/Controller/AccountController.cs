@@ -58,6 +58,30 @@ namespace Ausm.ThemeWithMenuAndIdentity
             }
         }
 
+        [HttpGet, Authorize]
+        public IActionResult ChangePassword()
+        {
+            return View(new ChangePasswordViewModel());
+        }
+
+        [HttpPost, Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            User user = await _userManager.GetUserAsync(User);
+            IdentityResult result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded)
+                return Redirect("/");
+
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError(error.Code, error.Description);
+
+            return View(model);
+        }
+
         [Authorize]
         public async Task<IActionResult> LogOff()
         {
