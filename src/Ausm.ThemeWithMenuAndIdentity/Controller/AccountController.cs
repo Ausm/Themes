@@ -90,13 +90,13 @@ namespace Ausm.ThemeWithMenuAndIdentity
         }
 
         [HttpGet, Authorize(Roles = "Admin")]
-        public IActionResult Register()
+        public IActionResult CreateUser()
         {
             return View();
         }
 
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Register(LoginViewModel model)
+        public async Task<IActionResult> CreateUser(CreateUserViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
