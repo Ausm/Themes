@@ -23,9 +23,8 @@ namespace Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<ThemeOptions>(themeOptions => {
+                themeOptions.LogoUrl = "/logo.png";
                 themeOptions.StaticMenuItems = new IMenuItem[] {
-                    new MenuItem("Home", controller: "Home", action: "Index"),
-                    new SeparatorItem(),
                     new MenuItem("Links",
                         new MenuItem("Google", url:"http://www.google.at"),
                         new MenuItem("Disabled", url:"http://www.youtube.com") { IsEnabled = false },
@@ -44,6 +43,7 @@ namespace Sample
         {
             app.UseDeveloperExceptionPage();
             app.UseTheme();
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }

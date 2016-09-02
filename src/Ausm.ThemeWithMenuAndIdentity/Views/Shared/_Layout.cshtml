@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="pull-left" href="#"><img src="@Options.Value.LogoUrl"></a>
+                <a class="navbar-brand" href="/">@if (!string.IsNullOrWhiteSpace(Options.Value.LogoUrl)){<span><img height="20" width="20" src="@Options.Value.LogoUrl"></span> }@Options.Value.BrandName</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
