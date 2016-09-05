@@ -1,0 +1,64 @@
+﻿@using Ausm.ThemeWithMenuAndIdentity
+@using Ausm.ThemeWithMenuAndIdentity.HtmlHelpers
+@using Microsoft.Extensions.Options
+@inject IOptions<ThemeOptions> Options
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">@if (!string.IsNullOrWhiteSpace(Options.Value.LogoUrl)){<span><img height="20" width="20" src="@Options.Value.LogoUrl"></span> }@Options.Value.BrandName</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    @MenuHelper.GetMenu(this, Options.Value.StaticMenuItems)
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @if (User.IsInRole("Admin")) {
+                                    <li><a asp-controller="Account" asp-action="CreateUser"><span class="glyphicon glyphicon-asterisk"></span> New User</a></li>
+                                    }
+                                    <li><a asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
+                                    <li><a onclick="document.getElementById('logoutForm').submit(); return false;" href="#"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </form>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-controller="Account" asp-action="Login"><span class="glyphicon glyphicon-log-in" ></span> Log in</a></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+</body>
+</html>

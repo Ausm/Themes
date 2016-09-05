@@ -1,0 +1,24 @@
+﻿@using Ausm.ThemeWithMenuAndIdentity.ViewModels.Account
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<h2>@ViewData["Title"].</h2>
+<div>
+    <div>
+        <section>
+            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" >
+                <div>
+                    <label asp-for="Username"/>
+                    <input asp-for="Username"/>
+                </div>
+                <div>
+                    <label asp-for="Password"/>
+                    <input asp-for="Password"/>
+                </div>
+                <button type="submit" class="btn btn-default">Log in</button>
+            </form>
+        </section>
+    </div>
+</div>
