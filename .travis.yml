@@ -36,3 +36,4 @@ script:
   - dotnet build --framework "netcoreapp1.0" **/project.json
   # dotnet test
   - dotnet test --framework "netcoreapp1.0" test/Ausm.EmptyTheme.Test/project.json
+  - dotnet test --framework "netcoreapp1.0" test/Ausm.ThemeWithMenuAndIdentity.Test/project.json

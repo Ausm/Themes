@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0-alpha-*",
+
+  "dependencies": {
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Microsoft.Extensions.FileProviders.Abstractions": "1.0.0",
+    "Microsoft.Extensions.Options": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
+    "ObjectStore.SQLite": "1.0.0-alpha4-0017",
+    "ObjectStore.Identity": "1.0.0-alpha4-0017"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "buildOptions": {
+    "embed": [
+      "wwwroot/css/*",
+      "wwwroot/fonts/*",
+      "wwwroot/js/*",
+      "Views/**/*"
+    ]
+  },
+
+  "scripts": {
+    "precompile": [ "npm install" ]
+  }
+}

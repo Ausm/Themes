@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+  "description": "ThemeWithMenuAndIdentity.Test.Identity Class Library",
+  "authors": [ "MatthiasA" ],
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    },
+    "Ausm.ThemeWithMenuAndIdentity": "1.0.0-alpha",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "Microsoft.AspNetCore.TestHost": "1.0.0",
+    "Microsoft.CodeCoverage": "1.0.1",
+    "xunit": "2.2.0-beta2-build3300"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    }
+  },
+
+  "buildOptions": {
+    "preserveCompilationContext": true
+  }
+}
