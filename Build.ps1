@@ -63,3 +63,4 @@ exec { & dotnet test .\test\Ausm.EmptyTheme.Test -c Release }
 exec { & dotnet test .\test\Ausm.ThemeWithMenuAndIdentity.Test -c Release }
 
 exec { & dotnet pack .\src\Ausm.EmptyTheme -c Release -o .\artifacts --version-suffix=$revision }
+exec { & dotnet pack .\src\Ausm.ThemeWithMenuAndIdentity -c Release -o .\artifacts --version-suffix=$revision }
