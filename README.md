@@ -7,6 +7,8 @@ Appveyor:
 [![Build status](https://ci.appveyor.com/api/projects/status/3ppghqrpyal0f45i/branch/master?svg=true)](https://ci.appveyor.com/project/Ausm/themes/branch/master)
 MyGet:
 [![MyGet CI](https://img.shields.io/myget/themes/v/Ausm.EmptyTheme.svg)](https://www.myget.org/feed/themes/package/nuget/Ausm.EmptyTheme)
+Nuget:
+[![NuGet Pre Release](https://img.shields.io/nuget/vpre/Ausm.EmptyTheme.svg?maxAge=2592000?style=plastic)](https://www.nuget.org/packages/Ausm.EmptyTheme)
 
 ##How to Use?
 
