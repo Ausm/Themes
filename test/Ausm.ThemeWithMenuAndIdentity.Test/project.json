@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "type": "platform"
     },
-    "Ausm.ThemeWithMenuAndIdentity": "1.0.0-alpha",
+    "Ausm.ThemeWithMenuAndIdentity": "1.0.0-alpha2",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Microsoft.AspNetCore.TestHost": "1.0.0",
     "Microsoft.CodeCoverage": "1.0.1",

@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ausm.ThemeWithMenuAndIdentity;
 using Microsoft.Extensions.Configuration;
+using Sample.Entities;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace Sample
 {
@@ -32,10 +35,15 @@ namespace Sample
                         new MenuItem("Facebook", url:"http://www.facebook.com"))
                 };
 
-                themeOptions.DynamicMenuItems = () => null;
+                themeOptions.SetDynamicMenuItemExpression((IHttpContextAccessor httpContextAccessor) =>
+                    new MenuItem[] {
+                        httpContextAccessor.HttpContext.User.IsInRole("Admin") ? new MenuItem("Is In Admin", url:"http://www.google.com") : null,
+                        new MenuItem(httpContextAccessor.HttpContext.User.Identity.Name ?? "Not logged in", "http://www.google.at"),
+                        new MenuItem(DateTime.Today.ToString(), "http://www.google.at")
+                    });
             });
 
-            services.AddTheme(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddTheme<User, Role, UserInRole>(Configuration.GetConnectionString("DefaultConnection"));
             services.AddMvc();
         }
 
