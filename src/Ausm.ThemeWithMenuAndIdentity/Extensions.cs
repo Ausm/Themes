@@ -14,12 +14,22 @@ namespace Ausm.ThemeWithMenuAndIdentity
         {
             AddTheme<User, Role>(services, connectionString);
         }
+
         public static void AddTheme<TUser, TRole>(this IServiceCollection services, string connectionString)
             where TUser : User
             where TRole : Role
         {
+            AddTheme<TUser, TRole, UserInRole<TUser, TRole>>(services, connectionString);
+        }
+
+        public static void AddTheme<TUser, TRole, TUserInRole>(this IServiceCollection services, string connectionString)
+            where TUser : User
+            where TRole : Role
+            where TUserInRole : UserInRole<TUser, TRole>
+        {
             services.AddObjectStoreWithSqlite(connectionString);
-            services.AddIdentity<TUser, TRole>().AddObjectStoreUserStores<TUser, TRole, UserInRole<TUser, TRole>>();
+            services.AddIdentity<TUser, TRole>().AddObjectStoreUserStores<TUser, TRole, TUserInRole>();
+            services.AddTransient(typeof(IUserManagerProvider), typeof(UserManagerProvider<TUser>));
 
             services.Configure<RazorViewEngineOptions>(options =>
             {

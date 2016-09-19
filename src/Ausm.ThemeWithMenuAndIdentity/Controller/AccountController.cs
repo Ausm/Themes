@@ -11,26 +11,11 @@ namespace Ausm.ThemeWithMenuAndIdentity
 {
     public class AccountController : Controller
     {
-        #region Subclasses
-        class UserMock : User
+        IUserManagerProvider _userManagerProvider;
+
+        public AccountController(IUserManagerProvider userManagerProvider)
         {
-            public override int Id => 0;
-
-            public override string Name { get; set; }
-
-            public override string NormalizedUsername { get; set; }
-
-            public override string Password { get; set; }
-        }
-        #endregion
-
-        SignInManager<User> _signInManager;
-        UserManager<User> _userManager;
-
-        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager)
-        {
-            _signInManager = signInManager;
-            _userManager = userManager;
+            _userManagerProvider = userManagerProvider;
         }
 
         [HttpGet]
@@ -48,7 +33,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
             if (!ModelState.IsValid)
                 return View(model);
 
-            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+            Microsoft.AspNetCore.Identity.SignInResult result = await _userManagerProvider.SignInAsync(model.Username, model.Password);
             if (result.Succeeded)
                 return Redirect(returnUrl ?? "/");
             else
@@ -70,9 +55,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
             if (!ModelState.IsValid)
                 return View(model);
 
-            User user = await _userManager.GetUserAsync(User);
-            IdentityResult result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-
+            IdentityResult result = await _userManagerProvider.ChangePasswordAsync(User, model.OldPassword, model.NewPassword);
             if (result.Succeeded)
                 return Redirect("/");
 
@@ -85,7 +68,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         [Authorize]
         public async Task<IActionResult> LogOff()
         {
-            await _signInManager.SignOutAsync();
+            await _userManagerProvider.SignOutAsync();
             return Redirect("/");
         }
 
@@ -101,7 +84,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
             if (!ModelState.IsValid)
                 return View(model);
 
-            IdentityResult result = await _userManager.CreateAsync(new UserMock() { Name = model.Username }, model.Password);
+            IdentityResult result = await _userManagerProvider.CreateUserAsync(model.Username, model.Password);
             if (result.Succeeded)
                 return Redirect("/");
 

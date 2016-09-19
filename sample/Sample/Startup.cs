@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ausm.ThemeWithMenuAndIdentity;
 using Microsoft.Extensions.Configuration;
+using Sample.Entities;
 
 namespace Sample
 {
@@ -35,7 +36,7 @@ namespace Sample
                 themeOptions.DynamicMenuItems = () => null;
             });
 
-            services.AddTheme(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddTheme<User, Role, UserInRole>(Configuration.GetConnectionString("DefaultConnection"));
             services.AddMvc();
         }
 
