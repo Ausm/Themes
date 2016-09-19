@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -10,6 +11,22 @@ namespace Ausm.ThemeWithMenuAndIdentity.HtmlHelpers
 {
     public static class MenuHelper
     {
+        public static IHtmlContent GetMenu(this Microsoft.AspNetCore.Mvc.Razor.RazorPage razorPage, Delegate menuItemFunction)
+        {
+            if (menuItemFunction == null)
+                return null;
+
+            IServiceProvider serviceProvider = razorPage.Context.RequestServices;
+            object[] arguments = menuItemFunction.GetMethodInfo().GetParameters().Select(x => serviceProvider.GetService(x.ParameterType)).ToArray();
+
+            IEnumerable<IMenuItem> menuItems = menuItemFunction.DynamicInvoke(arguments) as IEnumerable<IMenuItem>;
+
+            if (menuItems == null)
+                return null;
+
+            return GetMenu(razorPage, menuItems);
+        }
+
         public static IHtmlContent GetMenu(this Microsoft.AspNetCore.Mvc.Razor.RazorPage razorPage, IEnumerable<IMenuItem> menuItems)
         {
             if (menuItems == null)
@@ -20,13 +37,13 @@ namespace Ausm.ThemeWithMenuAndIdentity.HtmlHelpers
                 return null;
 
             HtmlContentBuilder builder = new HtmlContentBuilder();
-            foreach (IMenuItem menuItem in menuItems)
+            foreach (IMenuItem menuItem in menuItems.Where(x => x != null))
                 builder.AppendHtml(WriteMenuItemToBuilder(razorPage, urlHelper, menuItem));
 
             return builder;
         }
 
-        private static IHtmlContent WriteMenuItemToBuilder(this Microsoft.AspNetCore.Mvc.Razor.RazorPage razorPage, IUrlHelper helper, IMenuItem menuItem)
+        static IHtmlContent WriteMenuItemToBuilder(this Microsoft.AspNetCore.Mvc.Razor.RazorPage razorPage, IUrlHelper helper, IMenuItem menuItem)
         {
             TagBuilder liTag = new TagBuilder("li");
 
