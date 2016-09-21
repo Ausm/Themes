@@ -5,7 +5,7 @@
   "authors": [ "MatthiasA" ],
   "dependencies": {
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "type": "platform"
     },
     "Ausm.ThemeWithMenuAndIdentity": "1.0.0-alpha2",
