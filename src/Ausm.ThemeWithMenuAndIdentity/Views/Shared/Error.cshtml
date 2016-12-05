@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+@if (@ViewData["Error"] is IEnumerable<string>)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (string error in (IEnumerable<string>)@ViewData["Error"])
+        {
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            @error
+            <br />
+        }
+    </div>
+}
+else if (!string.IsNullOrWhiteSpace(@ViewData["Error"] as string))
+{
+<div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    @ViewData["Error"]
+</div>
+}

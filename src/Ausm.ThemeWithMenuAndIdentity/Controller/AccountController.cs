@@ -4,20 +4,48 @@ using Microsoft.AspNetCore.Authorization;
 using Ausm.ThemeWithMenuAndIdentity.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using ObjectStore.Identity;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Ausm.ThemeWithMenuAndIdentity
 {
     public class AccountController : Controller
     {
+        #region Fields
         IUserManagerProvider _userManagerProvider;
+        #endregion
 
+        #region Constructor
         public AccountController(IUserManagerProvider userManagerProvider)
         {
             _userManagerProvider = userManagerProvider;
         }
+        #endregion
 
+        #region Actions
+        #region Index
+        [HttpGet, Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            List<Role> roles = _userManagerProvider.GetRoles().ToList();
+            List<UserViewModel> model = new List<UserViewModel>();
+
+            foreach (User user in _userManagerProvider.GetUsers())
+            {
+                List<string> userRoles = (await _userManagerProvider.GetUserRolesAsync(user.Name)).ToList();
+
+                model.Add(new UserViewModel()
+                {
+                    Username = user.Name,
+                    UserRoles = roles.Select(x => new UserViewModel.Role() { Name = x.Name, IsSet = userRoles.Contains(x.Name) }).ToList()
+                });
+            }
+
+            return View(model);
+        }
+        #endregion
+
+        #region Login
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
@@ -42,7 +70,9 @@ namespace Ausm.ThemeWithMenuAndIdentity
                 return View(model);
             }
         }
+        #endregion
 
+        #region ChangePassword
         [HttpGet, Authorize]
         public IActionResult ChangePassword()
         {
@@ -64,34 +94,60 @@ namespace Ausm.ThemeWithMenuAndIdentity
 
             return View(model);
         }
+        #endregion
 
+        #region LogOff
         [Authorize]
         public async Task<IActionResult> LogOff()
         {
             await _userManagerProvider.SignOutAsync();
             return Redirect("/");
         }
+        #endregion
 
-        [HttpGet, Authorize(Roles = "Admin")]
-        public IActionResult CreateUser()
-        {
-            return View();
-        }
-
+        #region CreateUser
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateUser(CreateUserViewModel model)
+        public async Task<IActionResult> CreateUser(CreateUserViewModel model, [FromQuery] string returnurl)
         {
             if (!ModelState.IsValid)
-                return View(model);
+                return ViewError(ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
 
             IdentityResult result = await _userManagerProvider.CreateUserAsync(model.Username, model.Password);
             if (result.Succeeded)
-                return Redirect("/");
+            {
+                if (string.IsNullOrWhiteSpace(returnurl))
+                    return RedirectToAction("Index");
+                else
+                    return Redirect(returnurl);
+            }
 
-            foreach(IdentityError error in result.Errors)
-                ModelState.AddModelError(error.Code, error.Description);
-
-            return View(model);
+            return ViewError(result.Errors.Select(x => $"{x.Code} {x.Description}"));
         }
+        #endregion
+
+        #region ToggleRole
+        [HttpPost, Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ToggleRole([FromForm]string username, [FromForm]string rolename, [FromQuery]string returnurl)
+        {
+            IdentityResult result = await _userManagerProvider.ToggleUserRoleAsync(username, rolename);
+            if (!result.Succeeded)
+                foreach (IdentityError error in result.Errors)
+                    ModelState.AddModelError(error.Code, error.Description);
+
+            if (string.IsNullOrWhiteSpace(returnurl))
+                return RedirectToAction("Index");
+            else
+                return Redirect(returnurl);
+        }
+        #endregion
+        #endregion
+
+        #region Methods
+        IActionResult ViewError(IEnumerable<string> errors)
+        {
+            ViewData["Error"] = errors;
+            return View("Error");
+        }
+        #endregion
     }
 }
