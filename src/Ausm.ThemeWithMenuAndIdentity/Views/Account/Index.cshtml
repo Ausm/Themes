@@ -1,0 +1,85 @@
+﻿@using Ausm.ThemeWithMenuAndIdentity.ViewModels.Account
+@model IEnumerable<UserViewModel>
+@{
+    ViewData["Title"] = "List Users";
+}
+
+<h1>Manage Users</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th><h4>User name</h4></th>
+            <th><h4>Roles</h4></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (UserViewModel user in Model)
+        {
+            <tr>
+                <td><span class="glyphicon glyphicon-user"></span> <strong>@user.Username</strong></td>
+                <td>
+                    <form asp-conroller="Account" asp-action="ToggleRole" asp-route-returnurl="@Context.Request.Path" method="post">
+                        <input type="hidden" name="username" value="@user.Username" />
+                        <div class="btn-group-vertical btn-group-xs" role="group">
+                            @foreach (UserViewModel.Role role in user.UserRoles)
+                            {
+                                <button class="btn btm-sm @(role.IsSet ? "btn-success" : "")" name="rolename" value="@role.Name">@(role.IsSet ? "Remove from" : "Add to") Role <strong>@role.Name</strong></button>
+                            }
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2">
+                <h4>Create a new User</h4>
+                <div>
+                    <form asp-controller="Account" asp-action="CreateUser" method="post" asp-route-returnurl="@Context.Request.Path" class="form form-inline hidden-xs hidden-sm">
+                        <div class="form-group form-group-sm">
+                            <label for="Username" class="control-label">Username</label>
+                            <input type="text" class="form-control" name="Username" placeholder="Username">
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="Password" class="control-label">Password</label>
+                            <input type="password" class="form-control" name="Password" placeholder="Password">
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="ConfirmPassword" class="control-label">Confirm</label>
+                            <input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <button type="submit" class="btn btn-sm btn-primary">Create User</button>
+                        </div>
+                    </form>
+
+                    <form asp-controller="Account" asp-action="CreateUser" method="post" asp-route-returnurl="@Context.Request.Path" class="form form-horizontal hidden-md hidden-lg">
+                        <div class="form-group">
+                            <label for="Username" class="col-sm-3 control-label">Username</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="Username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password" class="col-sm-3 control-label">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="Password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ConfirmPassword" class="col-sm-3 control-label">Confirm</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-push-3 col-sm-9">
+                            <button type="submit" class="btn btn-sm btn-primary">Create User</button>
+                        </div>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

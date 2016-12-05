@@ -29,7 +29,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         {
             services.AddObjectStoreWithSqlite(connectionString);
             services.AddIdentity<TUser, TRole>().AddObjectStoreUserStores<TUser, TRole, TUserInRole>();
-            services.AddTransient(typeof(IUserManagerProvider), typeof(UserManagerProvider<TUser>));
+            services.AddTransient(typeof(IUserManagerProvider), typeof(UserManagerProvider<TUser, TRole>));
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
