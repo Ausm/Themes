@@ -10,6 +10,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         string Url { get; }
         string Controller { get; }
         string Action { get; }
+        object RouteValues { get; }
         IEnumerable<IMenuItem> SubItems { get; }
 
         bool IsEnabled { get; }
@@ -22,6 +23,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         #region Fields
         string _controller;
         string _action;
+        object _routeValues;
         string _name;
         string _url;
         IMenuItem[] _subItems;
@@ -32,12 +34,13 @@ namespace Ausm.ThemeWithMenuAndIdentity
         #endregion
 
         #region Constructors
-        public MenuItem(string name, string url = null, string controller = null, string action = null, Func<IEnumerable<IMenuItem>> subItemsFunc = null, IMenuItem[] subItems = null)
+        public MenuItem(string name, string url = null, string controller = null, string action = null, object routeValues = null, Func<IEnumerable<IMenuItem>> subItemsFunc = null, IMenuItem[] subItems = null)
         {
             _name = name;
             _url = url;
             _controller = controller;
             _action = action;
+            _routeValues = routeValues;
             _subItemsFunc = subItemsFunc;
             _subItems = subItems;
             _isEnabled = 
@@ -45,7 +48,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
         }
 
         public MenuItem(string name, params IMenuItem[] subItems) :
-            this(name, null, null, null, null, subItems)
+            this(name, null, null, null, null, null, subItems)
         {
         }
         #endregion
@@ -81,6 +84,8 @@ namespace Ausm.ThemeWithMenuAndIdentity
 
         string IMenuItem.Controller => _controller;
 
+        object IMenuItem.RouteValues => _routeValues;
+
         bool IMenuItem.IsEnabled => _isEnabled;
 
         bool IMenuItem.IsSeparator => false;
@@ -110,6 +115,7 @@ namespace Ausm.ThemeWithMenuAndIdentity
     {
         string IMenuItem.Action => null;
         string IMenuItem.Controller => null;
+        object IMenuItem.RouteValues => null;
         bool IMenuItem.IsEnabled => false;
         bool IMenuItem.IsSeparator => true;
         bool IMenuItem.IsVisible => true;

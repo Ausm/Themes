@@ -10,8 +10,8 @@
     "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.1",
     "NETStandard.Library": "1.6.0",
     "Microsoft.Extensions.FileProviders.Embedded": "1.0.0",
-    "ObjectStore.SQLite": "1.0.0-alpha4-0017",
-    "ObjectStore.Identity": "1.0.0-alpha4-0017"
+    "ObjectStore.SQLite": "1.0.0-alpha4-0018",
+    "ObjectStore.Identity": "1.0.0-alpha4-0018"
   },
 
   "frameworks": {
