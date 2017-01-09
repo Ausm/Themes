@@ -13,5 +13,12 @@ namespace Sample
         {
             return View();
         }
+
+        public IActionResult CheckValue(string id)
+        {
+            return View((object)id);
+        }
+
+
     }
 }

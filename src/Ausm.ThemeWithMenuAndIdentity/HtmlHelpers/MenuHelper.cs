@@ -70,7 +70,7 @@ namespace Ausm.ThemeWithMenuAndIdentity.HtmlHelpers
                 if (actionDescriptor?.ActionName == menuItem.Action && actionDescriptor?.ControllerName == menuItem.Controller)
                     liTag.AddCssClass("active");
 
-                aTag.Attributes.Add("href", helper.Action(menuItem.Action, menuItem.Controller));
+                aTag.Attributes.Add("href", helper.Action(menuItem.Action, menuItem.Controller, menuItem.RouteValues));
             }
             else
                 aTag.Attributes.Add("href", "#");

@@ -38,7 +38,9 @@ namespace Sample
                 themeOptions.SetDynamicMenuItemExpression((IHttpContextAccessor httpContextAccessor) =>
                     new MenuItem[] {
                         httpContextAccessor.HttpContext.User.IsInRole("Admin") ? new MenuItem("Is In Admin", url:"http://www.google.com") : null,
-                        new MenuItem(httpContextAccessor.HttpContext.User.Identity.Name ?? "Not logged in", "http://www.google.at"),
+                        httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ? 
+                            new MenuItem("CheckValue", controller:"Home", action:nameof(HomeController.CheckValue), routeValues: new { id = httpContextAccessor.HttpContext.User.Identity.Name }) :
+                            new MenuItem("Not logged in", "http://www.google.at"),
                         new MenuItem(DateTime.Today.ToString(), "http://www.google.at")
                     });
             });
