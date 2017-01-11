@@ -45,7 +45,6 @@ namespace Ausm.ThemeWithMenuAndIdentity.Test
             {
                 TheoryData<string, string> returnValue = new TheoryData<string, string>();
                 returnValue.Add("/css/bootstrap.min.css", "* Bootstrap v3");
-                returnValue.Add("/css/bootstrap-theme.min.css", "* Bootstrap v3");
                 returnValue.Add("/fonts/glyphicons-halflings-regular.eot", null);
                 returnValue.Add("/fonts/glyphicons-halflings-regular.svg", null);
                 returnValue.Add("/fonts/glyphicons-halflings-regular.ttf", null);
