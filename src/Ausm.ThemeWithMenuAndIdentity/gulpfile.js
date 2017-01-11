@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var concatCss = require('gulp-concat-css');
+var minifyCss = require('gulp-minify-css');
 var clean = require('gulp-dest-clean');
 
 gulp.task('default', ['copy']);
@@ -6,7 +8,11 @@ gulp.task('default', ['copy']);
 gulp.task('copy', ['copy:css', 'copy:js', 'copy:fonts']);
 
 gulp.task('copy:css', function () {
-    return gulp.src('./node_modules/bootstrap/dist/css/*.min.css').pipe(gulp.dest('./wwwroot/css')).pipe(clean('./wwwroot/css'));
+    return gulp.src(['./node_modules/bootstrap/dist/css/bootstrap.min.css', './Css/bootstrap.ext.css'])
+        .pipe(concatCss("bootstrap.min.css"))
+        .pipe(minifyCss())
+        .pipe(gulp.dest('./wwwroot/css'))
+        .pipe(clean('./wwwroot/css'));
 });
 
 gulp.task('copy:fonts', function () {
