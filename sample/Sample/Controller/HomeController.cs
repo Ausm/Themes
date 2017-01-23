@@ -19,6 +19,9 @@ namespace Sample
             return View((object)id);
         }
 
-
+        public IActionResult AccountSettings()
+        {
+            return View();
+        }
     }
 }
