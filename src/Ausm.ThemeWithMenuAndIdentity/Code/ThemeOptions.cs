@@ -7,6 +7,8 @@ namespace Ausm.ThemeWithMenuAndIdentity
     {
         public string BrandName { get; set; } = "Home";
         public string LogoUrl { get; set; }
+        public string AccountSettingController { get; set; } = "Home";
+        public string AccountSettingAction { get; set; }
         public IEnumerable<IMenuItem> StaticMenuItems { get; set; }
         public Delegate DynamicMenuItems { get; private set; }
 

@@ -38,10 +38,14 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @if (User.IsInRole("Admin")) {
-                                    <li><a asp-controller="Account" asp-action="Index">Manage User</a></li>
+                                    <li><a asp-controller="Account" asp-action="Index"><span class="glyphicon glyphicon-list"></span>&nbsp;Manage User</a></li>
                                     }
-                                    <li><a asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
-                                    <li><a onclick="document.getElementById('logoutForm').submit(); return false;" href="#"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>
+                                    @if (!string.IsNullOrWhiteSpace(Options.Value.AccountSettingAction))
+                                    {
+                                    <li><a asp-controller="@Options.Value.AccountSettingController" asp-action="@Options.Value.AccountSettingAction"><span class="glyphicon glyphicon-cog"></span>&nbsp;Account Settings</a></li>
+                                    }
+                                    <li><a asp-controller="Account" asp-action="ChangePassword"><span class="glyphicon glyphicon-lock"></span>&nbsp;Change Password</a></li>
+                                    <li><a onclick="document.getElementById('logoutForm').submit(); return false;" href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Log off</a></li>
                                 </ul>
                             </li>
                         </ul>

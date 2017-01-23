@@ -43,6 +43,8 @@ namespace Sample
                             new MenuItem("Not logged in", "http://www.google.at"),
                         new MenuItem(DateTime.Today.ToString(), "http://www.google.at")
                     });
+
+                themeOptions.AccountSettingAction = nameof(HomeController.AccountSettings);
             });
 
             services.AddTheme<User, Role, UserInRole>(Configuration.GetConnectionString("DefaultConnection"));
