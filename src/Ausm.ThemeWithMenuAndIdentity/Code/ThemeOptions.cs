@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ausm.ThemeWithMenuAndIdentity
 {
@@ -33,6 +34,31 @@ namespace Ausm.ThemeWithMenuAndIdentity
         }
 
         public void SetDynamicMenuItemExpression<T1, T2, T3, T4>(Func<T1, T2, T3, T4, IEnumerable<IMenuItem>> expression)
+        {
+            DynamicMenuItems = expression;
+        }
+
+        public void SetDynamicMenuItemExpression(Func<Task<IEnumerable<IMenuItem>>> expression)
+        {
+            DynamicMenuItems = expression;
+        }
+
+        public void SetDynamicMenuItemExpression<T1>(Func<T1, Task<IEnumerable<IMenuItem>>> expression)
+        {
+            DynamicMenuItems = expression;
+        }
+
+        public void SetDynamicMenuItemExpression<T1, T2>(Func<T1, T2, Task<IEnumerable<IMenuItem>>> expression)
+        {
+            DynamicMenuItems = expression;
+        }
+
+        public void SetDynamicMenuItemExpression<T1, T2, T3>(Func<T1, T2, T3, Task<IEnumerable<IMenuItem>>> expression)
+        {
+            DynamicMenuItems = expression;
+        }
+
+        public void SetDynamicMenuItemExpression<T1, T2, T3, T4>(Func<T1, T2, T3, T4, Task<IEnumerable<IMenuItem>>> expression)
         {
             DynamicMenuItems = expression;
         }

@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Sample.Entities;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Sample
 {
@@ -35,14 +37,24 @@ namespace Sample
                         new MenuItem("Facebook", url:"http://www.facebook.com"))
                 };
 
-                themeOptions.SetDynamicMenuItemExpression((IHttpContextAccessor httpContextAccessor) =>
-                    new MenuItem[] {
-                        httpContextAccessor.HttpContext.User.IsInRole("Admin") ? new MenuItem("Is In Admin", url:"http://www.google.com") : null,
-                        httpContextAccessor.HttpContext.User.Identity.IsAuthenticated ? 
-                            new MenuItem("CheckValue", controller:"Home", action:nameof(HomeController.CheckValue), routeValues: new { id = httpContextAccessor.HttpContext.User.Identity.Name }) :
-                            new MenuItem("Not logged in", "http://www.google.at"),
-                        new MenuItem(DateTime.Today.ToString(), "http://www.google.at")
-                    });
+                themeOptions.SetDynamicMenuItemExpression(async (IHttpContextAccessor httpContextAccessor, UserManager<User> userManager) => {
+                    List<MenuItem> returnValue = new List<MenuItem>();
+
+                    User user = await userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+                    if (user != null)
+                        returnValue.Add(new MenuItem(user.Name, url: "www.google.com"));
+
+                    if (httpContextAccessor.HttpContext.User.IsInRole("Admin"))
+                        returnValue.Add(new MenuItem("Is In Admin", url: "http://www.google.com"));
+
+                    if (httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+                        returnValue.Add(new MenuItem("CheckValue", controller: "Home", action: nameof(HomeController.CheckValue), routeValues: new { id = httpContextAccessor.HttpContext.User.Identity.Name }));
+                    else
+                        returnValue.Add(new MenuItem("Not logged in", "http://www.google.at"));
+
+                    returnValue.Add(new MenuItem(DateTime.Today.ToString(), "http://www.google.at"));
+                    return returnValue;
+                });
 
                 themeOptions.AccountSettingAction = nameof(HomeController.AccountSettings);
             });
