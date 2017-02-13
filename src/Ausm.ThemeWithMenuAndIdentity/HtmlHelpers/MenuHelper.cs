@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Ausm.ThemeWithMenuAndIdentity.HtmlHelpers
 {
     public static class MenuHelper
     {
-        public static IHtmlContent GetMenu(this Microsoft.AspNetCore.Mvc.Razor.RazorPage razorPage, Delegate menuItemFunction)
+        public static async Task<IHtmlContent> GetMenu(this Microsoft.AspNetCore.Mvc.Razor.RazorPage razorPage, Delegate menuItemFunction)
         {
             if (menuItemFunction == null)
                 return null;
@@ -19,7 +20,15 @@ namespace Ausm.ThemeWithMenuAndIdentity.HtmlHelpers
             IServiceProvider serviceProvider = razorPage.Context.RequestServices;
             object[] arguments = menuItemFunction.GetMethodInfo().GetParameters().Select(x => serviceProvider.GetService(x.ParameterType)).ToArray();
 
-            IEnumerable<IMenuItem> menuItems = menuItemFunction.DynamicInvoke(arguments) as IEnumerable<IMenuItem>;
+            object funcReturnValue = menuItemFunction.DynamicInvoke(arguments);
+
+            IEnumerable<IMenuItem> menuItems;
+            if (funcReturnValue is IEnumerable<IMenuItem>)
+                menuItems = (IEnumerable<IMenuItem>)funcReturnValue;
+            else if (funcReturnValue is Task<IEnumerable<IMenuItem>>)
+                menuItems = await (Task<IEnumerable<IMenuItem>>)funcReturnValue;
+            else
+                menuItems = null;
 
             if (menuItems == null)
                 return null;
