@@ -96,6 +96,32 @@ namespace Ausm.ThemeWithMenuAndIdentity
         }
         #endregion
 
+        #region ResetPassword
+        [HttpGet, Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ResetPasswordByAdmin(string username) =>
+            RedirectToAction(nameof(ResetPassword), new { u = username, t = await _userManagerProvider.GeneratePasswordResetTokenAsync(username) });
+
+        [HttpGet]
+        public IActionResult ResetPassword(string u, string t) =>
+            View(new ResetPasswordViewModel() { Username = u, Token = t });
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            IdentityResult result = await _userManagerProvider.ResetPasswordAsync(model.Username, model.Token, model.NewPassword);
+            if (result.Succeeded)
+                return Redirect("/");
+
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError(error.Code, error.Description);
+
+            return View(model);
+        }
+        #endregion
+
         #region LogOff
         [Authorize]
         public async Task<IActionResult> LogOff()

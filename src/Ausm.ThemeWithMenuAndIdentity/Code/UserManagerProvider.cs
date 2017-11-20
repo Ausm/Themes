@@ -12,6 +12,8 @@ namespace Ausm.ThemeWithMenuAndIdentity
         Task<SignInResult> SignInAsync(string username, string password);
         Task SignOutAsync();
         Task<IdentityResult> ChangePasswordAsync(ClaimsPrincipal principal, string currentPassword, string newPassword);
+        Task<string> GeneratePasswordResetTokenAsync(string username);
+        Task<IdentityResult> ResetPasswordAsync(string username, string token, string newPassword);
         Task<IdentityResult> CreateUserAsync(string username, string password);
         IEnumerable<User> GetUsers();
         IEnumerable<Role> GetRoles();
@@ -53,6 +55,18 @@ namespace Ausm.ThemeWithMenuAndIdentity
         {
             TUser user = await _userManager.GetUserAsync(principal);
             return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(string username)
+        {
+            TUser user = await _userManager.FindByNameAsync(username);
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
+
+        public async Task<IdentityResult> ResetPasswordAsync(string username, string token, string newPassword)
+        {
+            TUser user = await _userManager.FindByNameAsync(username);
+            return await _userManager.ResetPasswordAsync(user, token, newPassword);
         }
 
         public async Task<IdentityResult> CreateUserAsync(string username, string password)
