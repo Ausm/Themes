@@ -28,15 +28,15 @@ namespace Ausm.ThemeWithMenuAndIdentity
             where TUserInRole : UserInRole<TUser, TRole>
         {
             services.AddObjectStoreWithSqlite(connectionString);
-            services.AddIdentity<TUser, TRole>().AddObjectStoreUserStores<TUser, TRole, TUserInRole>();
+            services.AddIdentity<TUser, TRole>().AddObjectStoreUserStores<TUser, TRole, TUserInRole>().AddDefaultTokenProviders();
             services.AddTransient(typeof(IUserManagerProvider), typeof(UserManagerProvider<TUser, TRole>));
+
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.FileProviders.Add(new EmbeddedFileProvider(typeof(ThemeExtensions).GetTypeInfo().Assembly, typeof(ThemeExtensions).Namespace));
             });
         }
-
 
         public static void UseTheme(this IApplicationBuilder app)
         {

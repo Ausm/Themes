@@ -12,6 +12,7 @@
     <thead>
         <tr>
             <th><h4>User name</h4></th>
+            <th><h4>Actions</h4></th>
             <th><h4>Roles</h4></th>
         </tr>
     </thead>
@@ -20,6 +21,9 @@
         {
             <tr>
                 <td><span class="glyphicon glyphicon-user"></span> <strong>@user.Username</strong></td>
+                <td>
+                    <a asp-controller="Account" asp-action="@nameof(Ausm.ThemeWithMenuAndIdentity.AccountController.ResetPasswordByAdmin)" asp-route-username="@user.Username" class="btn btn-xs btn-primary">Reset Password</a>
+                </td>
                 <td>
                     <form asp-conroller="Account" asp-action="ToggleRole" asp-route-returnurl="@Context.Request.Path" method="post">
                         <input type="hidden" name="username" value="@user.Username" />
@@ -34,7 +38,7 @@
             </tr>
         }
         <tr>
-            <td colspan="2">
+            <td colspan="3">
                 <h4>Create a new User</h4>
                 <div>
                     <form asp-controller="Account" asp-action="CreateUser" method="post" asp-route-returnurl="@Context.Request.Path" class="form form-inline hidden-xs hidden-sm">
